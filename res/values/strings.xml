@@ -21,7 +21,7 @@
         <item >柯P新政</item>
         <item >真・柯文哲</item>
         <item >新聞稿</item>
-        <item>KP歌</item>
+        
         
        
     </string-array>
@@ -33,7 +33,7 @@
         <item>@drawable/ic_people</item>
         <item>@drawable/ic_people</item>
         <item>@drawable/ic_photos</item>
-      	<item>@drawable/ic_photos</item>
+      
       
     </array>
     

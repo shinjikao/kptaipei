@@ -67,10 +67,8 @@ public class RealManKP extends ListFragment {
 		Log.d(TAG, "Politics");
 
 		// get json data
-		urlPolitics = getResources().getString(R.string.urlPolitics);
 		urlRealMan = getResources().getString(R.string.urlRealMan);
-		urlNews = getResources().getString(R.string.urlNews);
-
+		
 		politicsList = new ArrayList<HashMap<String, String>>();
 		pDialog = new ProgressDialog(getActivity());
 		pDialog.setMessage("Please wait...");
@@ -83,9 +81,9 @@ public class RealManKP extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.d(MainActivity.TAG, "onCreateView");
+		
 
-		View rootView = inflater.inflate(R.layout.fragment_rentlist, container,
+		View rootView = inflater.inflate(R.layout.fragment_realman, container,
 				false);
 
 		return rootView;
@@ -98,13 +96,10 @@ public class RealManKP extends ListFragment {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						// Log.d(TAG, response.toString());
 						try {
 
 							Log.d(TAG, String.valueOf(response.length()));
-							String isScccuess = response
-									.getString(tag_isSuccess);
-
+							String isScccuess = response.getString(tag_isSuccess);
 							JSONArray data = response.getJSONArray("data");
 							String idd = "";
 							String title = "";
@@ -140,26 +135,20 @@ public class RealManKP extends ListFragment {
 								politicsList.add(retVal);
 							}
 
-							ListAdapter adapter = new SimpleAdapter(
-									getActivity(), politicsList,
-									R.layout.rkp_list_item, new String[] {
-											tag_id, tag_title, tag_post_date,
-											tag_category_name, tag_url },
-									new int[] { R.id.id, R.id.title,
-											R.id.post_date, R.id.category,
-											R.id.url });
+							ListAdapter adapter = new SimpleAdapter(getActivity(), politicsList, R.layout.list_item_rkp, new String[] {
+									tag_id, tag_title, tag_post_date,tag_category_name, tag_url },
+									new int[] { R.id.id, R.id.title,R.id.post_date, R.id.category,R.id.url });
 							setListAdapter(adapter);
 
 							ListView lv = getListView();
 
 							// listening to single list item on click
-							lv.setOnItemClickListener(new OnItemClickListener() {
-								public void onItemClick(AdapterView<?> parent,
+							lv.setOnItemClickListener(new OnItemClickListener() {public void onItemClick(AdapterView<?> parent,
 										View view, int position, long id) {
 
 									// to single page
 									Fragment fragment = null;
-									fragment = new RKPSingleListItem(
+									fragment = new SingleListItem_RealManKP(
 											politicsList.get(position));
 									if (fragment != null) {
 										FragmentManager fragmentManager = getFragmentManager();

@@ -31,6 +31,7 @@ public class CustomLstAdapter extends BaseAdapter {
 	}
 
 	@Override
+	
 	public int getCount() {
 		return politicsItems.size();
 	}
@@ -68,14 +69,15 @@ public class CustomLstAdapter extends BaseAdapter {
 		
 		
 		HashMap<String,String> p = politicsItems.get(position);		
-		String content = p.get("tag_content");
-		Log.d(MainActivity.TAG , "content=" + content);
 		
+		String sTitle = p.get("title");
+		String sAuthor = p.get("author");
+		String sDate = p.get("post_date");
 		
-		thumbNail.setImageUrl( "http://img.youtube.com/vi/_81VSvC7m3k/0.jpg", imageLoader);
-		title.setText(p.get("title"));
-		author.setText(p.get("author"));
-		postDate.setText(p.get("post_date"));
+		thumbNail.setImageUrl( "http://img.youtube.com/vi/"+p.get("youtubeId") +"/0.jpg", imageLoader);
+		title.setText(sTitle.replace( p.get("category_name"), ""));
+		author.setText(sAuthor);
+		postDate.setText(sDate.subSequence(0,sDate.indexOf("T")));
 		
 		return convertView;
 

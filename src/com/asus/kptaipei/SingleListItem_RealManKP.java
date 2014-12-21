@@ -16,7 +16,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-public class RKPSingleListItem extends Fragment {
+public class SingleListItem_RealManKP extends Fragment {
 	private static String TAG = "KP";
 
 	private TextView tv_title;
@@ -25,7 +25,7 @@ public class RKPSingleListItem extends Fragment {
 
 	HashMap<String, String> _retVal;
 
-	public RKPSingleListItem(HashMap<String, String> retVal) {
+	public SingleListItem_RealManKP(HashMap<String, String> retVal) {
 		_retVal = retVal;
 
 	}
@@ -42,7 +42,7 @@ public class RKPSingleListItem extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.rkp_single_list_item_view,
+		View rootView = inflater.inflate(R.layout.single_list_item_view_realman,
 				container, false);
 
 		TextView tv_title = (TextView) rootView.findViewById(R.id.Single_Title);

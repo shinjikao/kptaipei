@@ -42,7 +42,7 @@ public class SingleListItem extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.rkp_single_list_item_view,
+		View rootView = inflater.inflate(R.layout.single_list_item_view_realman,
 				container, false);
 
 		tv_title = (TextView) rootView.findViewById(R.id.Single_Title);

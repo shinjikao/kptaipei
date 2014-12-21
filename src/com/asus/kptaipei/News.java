@@ -6,12 +6,14 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +32,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.asus.kptaipei.R;
 import com.asus.kptaipei.app.AppController;
 
 public class News extends ListFragment {
@@ -66,11 +67,9 @@ public class News extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Log.d(TAG, "Politics");
+		Log.d(TAG, "News");
 
 		// get json data
-		urlPolitics = getResources().getString(R.string.urlPolitics);
-		urlRealMan = getResources().getString(R.string.urlRealMan);
 		urlNews = getResources().getString(R.string.urlNews);
 
 		newsList = new ArrayList<HashMap<String, String>>();
@@ -86,9 +85,7 @@ public class News extends ListFragment {
 			Bundle savedInstanceState) {
 		Log.d(MainActivity.TAG, "onCreateView");
 
-		View rootView = inflater.inflate(R.layout.fragment_rentlist, container,
-				false);
-
+		View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 		return rootView;
 	}
 
@@ -102,10 +99,13 @@ public class News extends ListFragment {
 						// Log.d(TAG, response.toString());
 						try {
 
-							Log.d(TAG, String.valueOf(response.length()));
-							String isScccuess = response
-									.getString(tag_isSuccess);
+							
+							String isScccuess = response.getString(tag_isSuccess);
 
+							
+							Log.d(TAG,urlNews);
+							
+							
 							JSONArray data = response.getJSONArray("data");
 							String idd = "";
 							String title = "";
@@ -139,29 +139,27 @@ public class News extends ListFragment {
 								retVal.put(tag_category_name, category_name);
 
 								newsList.add(retVal);
+
 							}
 
-							ListAdapter adapter = new SimpleAdapter(
-									getActivity(), newsList,
-									R.layout.news_list_item, new String[] {
-											tag_id, tag_title, tag_post_date,
-											tag_category_name, tag_url },
-									new int[] { R.id.id, R.id.title,
-											R.id.post_date, R.id.category,
-											R.id.url });
+							
+							
+							
+							ListAdapter adapter = new SimpleAdapter(getActivity(), newsList,
+									R.layout.list_item_news,
+									new String[] { tag_title, tag_post_date, tag_category_name, tag_url },
+									new int[] { R.id.title, R.id.post_date, R.id.category, R.id.url });
 							setListAdapter(adapter);
 
 							ListView lv = getListView();
 
 							// listening to single list item on click
 							lv.setOnItemClickListener(new OnItemClickListener() {
-								public void onItemClick(AdapterView<?> parent,
-										View view, int position, long id) {
+								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 									// to single page
 									Fragment fragment = null;
-									fragment = new NewsSingleListItem(newsList
-											.get(position));
+									fragment = new SingleListItem_News(newsList.get(position));
 									if (fragment != null) {
 										FragmentManager fragmentManager = getFragmentManager();
 										fragmentManager
@@ -178,9 +176,7 @@ public class News extends ListFragment {
 
 						} catch (JSONException e) {
 							e.printStackTrace();
-							Toast.makeText(getActivity(),
-									"Error " + e.getMessage(),
-									Toast.LENGTH_LONG).show();
+							Toast.makeText(getActivity(), "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
 						}
 
 						hideDialog();

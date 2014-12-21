@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
+    android:background="@drawable/list_selector"
+    android:padding="8dp" >
+
+    <!-- Thumbnail Image -->
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/pthumbnail"
+        android:layout_width="96dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="4dp" />
+
+    <!-- Title -->
 
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/ptitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID" 
-        android:textColor="@android:color/white" 
-        />
+        android:layout_alignTop="@+id/pthumbnail"
+        android:layout_toEndOf="@+id/pthumbnail"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/title"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/ppostDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title" 
-        android:textColor="@android:color/white" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/post_date" >
+    </TextView>
 
     <TextView
-        android:id="@+id/post_date"
-        android:layout_width="wrap_content"
+        android:id="@+id/pauthor"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Date" 
-        android:textColor="@android:color/white" />
+        android:layout_below="@id/ptitle"
+        android:layout_toEndOf="@+id/pthumbnail"
+         android:textColor="@android:color/white"
+        android:textSize="@dimen/author" >
+    </TextView>
 
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="wrap_content" 
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Url" 
-        android:textColor="@android:color/white" />
-
-</LinearLayout>
+</RelativeLayout>

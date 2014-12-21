@@ -45,18 +45,7 @@ public class SingleListItem extends Fragment {
 		View rootView = inflater.inflate(R.layout.single_list_item_view_realman,
 				container, false);
 
-		tv_title = (TextView) rootView.findViewById(R.id.Single_Title);
-		String title = _retVal.get("title");
-
-		tv_title.setText(title);
-
-		tv_content = (TextView) rootView.findViewById(R.id.Single_Content);
-		String content = stripHtml(_retVal.get("content"));
-
-		Log.d(TAG, "content =" + content);
-
-		tv_content.setText(content);
-		tv_content.setMovementMethod(new ScrollingMovementMethod());
+	
 
 		return rootView;
 

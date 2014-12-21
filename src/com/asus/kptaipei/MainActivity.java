@@ -132,6 +132,7 @@ public class MainActivity extends Activity {
 		switch (position) {
 		case 0:
 			fragment = new Home();
+			
 			break;
 		case 1:
 			fragment = new Politics();
@@ -149,16 +150,22 @@ public class MainActivity extends Activity {
 		default:
 			break;
 		}
-
+		
 		if (fragment != null) {
 			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
-
+			fragmentManager
+			.beginTransaction()
+			.replace(R.id.frame_container, fragment)
+			.addToBackStack(null)
+			.commit();
+			
 			// update selected item and title , then close the drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
 			setTitle(navMenuTitles[position]);
 			mDrawerLayout.closeDrawer(mDrawerList);
+			
+			
 		} else {
 			Log.e("MainActivity", "Error in creating fragment");
 		}
@@ -215,4 +222,8 @@ public class MainActivity extends Activity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
+	
+	
+	
+	
 }

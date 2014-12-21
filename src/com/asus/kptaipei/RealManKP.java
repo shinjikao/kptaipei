@@ -64,11 +64,15 @@ public class RealManKP extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Log.d(TAG, "Politics");
+
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Log.i(TAG, "onCreateView[RealManKP]");
 
 		// get json data
 		urlRealMan = getResources().getString(R.string.urlRealMan);
-		
 		politicsList = new ArrayList<HashMap<String, String>>();
 		pDialog = new ProgressDialog(getActivity());
 		pDialog.setMessage("Please wait...");
@@ -76,15 +80,7 @@ public class RealManKP extends ListFragment {
 
 		makeJsonObjectRequest();
 
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
-
-		View rootView = inflater.inflate(R.layout.fragment_realman, container,
-				false);
+		View rootView = inflater.inflate(R.layout.fragment_realman, container, false);
 
 		return rootView;
 	}
@@ -136,14 +132,15 @@ public class RealManKP extends ListFragment {
 							}
 
 							ListAdapter adapter = new SimpleAdapter(getActivity(), politicsList, R.layout.list_item_rkp, new String[] {
-									tag_id, tag_title, tag_post_date,tag_category_name, tag_url },
-									new int[] { R.id.id, R.id.title,R.id.post_date, R.id.category,R.id.url });
+									tag_id, tag_title, tag_post_date, tag_category_name, tag_url },
+									new int[] { R.id.id, R.id.title, R.id.post_date, R.id.category, R.id.url });
 							setListAdapter(adapter);
 
 							ListView lv = getListView();
 
 							// listening to single list item on click
-							lv.setOnItemClickListener(new OnItemClickListener() {public void onItemClick(AdapterView<?> parent,
+							lv.setOnItemClickListener(new OnItemClickListener() {
+								public void onItemClick(AdapterView<?> parent,
 										View view, int position, long id) {
 
 									// to single page
@@ -154,8 +151,9 @@ public class RealManKP extends ListFragment {
 										FragmentManager fragmentManager = getFragmentManager();
 										fragmentManager
 												.beginTransaction()
-												.replace(R.id.frame_container,
-														fragment).commit();
+												.replace(R.id.frame_container, fragment)
+												.addToBackStack(null)
+												.commit();
 
 									} else {
 										Log.e(TAG, "Error in create fragment");

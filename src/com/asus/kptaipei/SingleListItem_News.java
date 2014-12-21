@@ -3,28 +3,26 @@ package com.asus.kptaipei;
 import java.util.HashMap;
 
 import android.app.Fragment;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LevelListDrawable;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Html;
-import android.text.Html.ImageGetter;
-import android.text.Spanned;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.PluginState;
+import android.webkit.WebView;
 
-public class SingleListItem_News extends Fragment implements ImageGetter{
+public class SingleListItem_News extends Fragment {
 	private static String TAG = "KP";
 
-	private TextView tv_title;
-	private TextView tv_content;
-	private TextView tv_image_news;
-
 	
+	private WebView myWebViewContent;
+	private String html ="";
 	HashMap<String, String> _retVal;
 
 	public SingleListItem_News(HashMap<String, String> retVal) {
@@ -34,55 +32,21 @@ public class SingleListItem_News extends Fragment implements ImageGetter{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d(TAG, "News Single Item Class");
+		
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
+		
+		html = _retVal.get("content");
+		
+		Log.d(TAG, "html =" + html );
 		View rootView = inflater.inflate(R.layout.single_list_item_view_news,container, false);
 
-		tv_title = (TextView) rootView.findViewById(R.id.Single_Title);
-		String title = _retVal.get("title");
-
-		tv_title.setText(title);
-
-		tv_content = (TextView) rootView.findViewById(R.id.Single_Content);
-		
-		tv_image_news = (TextView) rootView.findViewById(R.id.Single_Item_Image);
-//		String content = stripHtml(_retVal.get("content"));
-
-		
-		//Spanned content = Html.fromHtml(_retVal.get("content"));
-		
-		
-		//Log.d(TAG, "content =" + content);
-
-		
-		
-		
-		
-		
-		
-		//Document doc = Jsoup.parse(newsList.get(0).get("content"));
-		//Element img = doc.body().getElementsByClass("alignnone wp-image-4153 size-full").attr("img");
-		//String img = doc.body().getElementsByClass("caption").html();
-
-		//Log.d(TAG, src);
-		
-		
-		tv_image_news.setText(Html.fromHtml(_retVal.get("content"), new ImageGetter() {                 
-            @Override
-            public Drawable getDrawable(String source) {
-                String path =  source;
-
-                Drawable bmp = Drawable.createFromPath(path);
-                bmp.setBounds(0, 0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
-
-                return bmp;
-            }
-        }, null));
-		tv_content.setMovementMethod(new ScrollingMovementMethod());
+		myWebViewContent = (WebView) rootView.findViewById(R.id.news_content);
+		SettingWebView();
+	
 
 		return rootView;
 
@@ -92,24 +56,37 @@ public class SingleListItem_News extends Fragment implements ImageGetter{
 		return Html.fromHtml(html).toString();
 	}
 
-	@Override
-	public Drawable getDrawable(String source) {
-		 // TODO Auto-generated method stub
-        int id = 0;
-
-        if(source.equals("addbutton.png")){
-          // id = R.drawable.addbutton;
-        }
-
-        if(source.equals("tu1.png")){
-           // id = R.drawable.tu1;
-        }
-        LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = getResources().getDrawable(id);
-        d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
-
-        return d;
-		
+	private int getScale() {
+		Display display = ((WindowManager) getActivity().getSystemService(
+				Context.WINDOW_SERVICE)).getDefaultDisplay();
+		int width = display.getWidth();
+		Double val = new Double(width) / new Double(560);
+		val = val * 100d;
+		return val.intValue();
 	}
+
+	
+	
+	private void SettingWebView()
+	{
+		WebSettings ws = myWebViewContent.getSettings();
+		ws.getPluginState();
+		ws.setPluginState(PluginState.ON);
+		ws.setJavaScriptEnabled(true);
+		ws.setJavaScriptCanOpenWindowsAutomatically(true);
+		ws.setTextSize(WebSettings.TextSize.LARGER);
+		ws.setAllowFileAccess(true);
+		myWebViewContent.setInitialScale(getScale());
+		myWebViewContent.getSettings().setJavaScriptEnabled(true);
+		myWebViewContent.setEnabled(true);
+		html = html.trim().replace(html, " <body style='margin:0; padding: 0;'>" + html + "</body>");
+		myWebViewContent.setWebChromeClient(new WebChromeClient() {});
+		myWebViewContent.loadData(html, "text/html; charset=utf-8", "UTF-8");
+	}
+	
+	
+	
+	
+
+	
 }

@@ -68,6 +68,14 @@ public class Politics extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		
+		Log.i(TAG, "onCreateView[Politics]");
+		
 		// get json data
 		urlPolitics = getResources().getString(R.string.urlPolitics);
 		urlRealMan = getResources().getString(R.string.urlRealMan);
@@ -79,12 +87,6 @@ public class Politics extends Fragment {
 		pDialog.setCancelable(false);
 
 		makeJsonObjectRequest();
-
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment_politics, container, false);
 
@@ -98,7 +100,7 @@ public class Politics extends Fragment {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						 Log.d(TAG, "myTag=" + response.toString());
+						Log.d(TAG, "myTag=" + response.toString());
 						try {
 
 							Log.d(TAG, String.valueOf(response.length()));
@@ -139,8 +141,6 @@ public class Politics extends Fragment {
 									content = content.replace(removeStr1, "").replace(removeStr2, "");
 								}
 
-								
-
 								HashMap<String, String> retVal = new HashMap<String, String>();
 
 								retVal.put(tag_id, idd);
@@ -172,8 +172,9 @@ public class Politics extends Fragment {
 										FragmentManager fragmentManager = getFragmentManager();
 										fragmentManager
 												.beginTransaction()
-												.replace(R.id.frame_container,
-														fragment).commit();
+												.replace(R.id.frame_container, fragment)
+												.addToBackStack(null)
+												.commit();
 
 									} else {
 										Log.e(TAG, "Error in create fragment");

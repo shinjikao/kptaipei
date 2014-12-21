@@ -67,7 +67,14 @@ public class News extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Log.d(TAG, "News");
+		
+
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		Log.i(MainActivity.TAG, "onCreateView[News]");
 
 		// get json data
 		urlNews = getResources().getString(R.string.urlNews);
@@ -77,13 +84,6 @@ public class News extends ListFragment {
 		pDialog.setMessage("Please wait...");
 		pDialog.setCancelable(false);
 		makeJsonObjectRequest();
-
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		Log.d(MainActivity.TAG, "onCreateView");
 
 		View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 		return rootView;
@@ -99,13 +99,10 @@ public class News extends ListFragment {
 						// Log.d(TAG, response.toString());
 						try {
 
-							
 							String isScccuess = response.getString(tag_isSuccess);
 
-							
-							Log.d(TAG,urlNews);
-							
-							
+							Log.d(TAG, urlNews);
+
 							JSONArray data = response.getJSONArray("data");
 							String idd = "";
 							String title = "";
@@ -142,9 +139,6 @@ public class News extends ListFragment {
 
 							}
 
-							
-							
-							
 							ListAdapter adapter = new SimpleAdapter(getActivity(), newsList,
 									R.layout.list_item_news,
 									new String[] { tag_title, tag_post_date, tag_category_name, tag_url },
@@ -164,8 +158,9 @@ public class News extends ListFragment {
 										FragmentManager fragmentManager = getFragmentManager();
 										fragmentManager
 												.beginTransaction()
-												.replace(R.id.frame_container,
-														fragment).commit();
+												.replace(R.id.frame_container, fragment)
+												.addToBackStack(null)
+												.commit();
 
 									} else {
 										Log.e(TAG, "Error in create fragment");

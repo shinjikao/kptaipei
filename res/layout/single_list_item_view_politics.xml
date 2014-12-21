@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-  <WebView
-        android:id="@+id/realman_content"
+   
+    <WebView
+        android:id="@+id/plolitics_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />
-    
+
 </LinearLayout>

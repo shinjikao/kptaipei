@@ -20,12 +20,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int author=0x7f040006;
-        public static final int counter_text_bg=0x7f040004;
-        public static final int counter_text_color=0x7f040005;
-        public static final int list_background=0x7f040001;
-        public static final int list_background_pressed=0x7f040002;
-        public static final int list_divider=0x7f040003;
+        public static final int author=0x7f040007;
+        public static final int counter_text_bg=0x7f040005;
+        public static final int counter_text_color=0x7f040006;
+        public static final int list_background_gray=0x7f040001;
+        public static final int list_background_pressed=0x7f040003;
+        public static final int list_background_white=0x7f040002;
+        public static final int list_divider=0x7f040004;
         public static final int list_item_title=0x7f040000;
     }
     public static final class dimen {
@@ -57,27 +58,26 @@ public final class R {
         public static final int list_item_bg_normal=0x7f02000c;
         public static final int list_item_bg_pressed=0x7f02000d;
         public static final int list_selector=0x7f02000e;
+        public static final int list_selector_white=0x7f02000f;
     }
     public static final class id {
-        public static final int Single_Content=0x7f0a0013;
-        public static final int Single_Item_Image=0x7f0a0011;
-        public static final int Single_Title=0x7f0a0010;
-        public static final int action_settings=0x7f0a0014;
+        public static final int action_settings=0x7f0a0012;
         public static final int category=0x7f0a0008;
         public static final int counter=0x7f0a0005;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
-        public static final int horizontalScrollView1=0x7f0a0012;
         public static final int icon=0x7f0a0003;
-        public static final int id=0x7f0a000a;
+        public static final int id=0x7f0a000e;
         public static final int list=0x7f0a0006;
         public static final int list_slidermenu=0x7f0a0002;
-        public static final int pauthor=0x7f0a000e;
-        public static final int plolitics_content=0x7f0a000f;
+        public static final int news_content=0x7f0a000f;
+        public static final int pauthor=0x7f0a000d;
+        public static final int plolitics_content=0x7f0a0010;
         public static final int post_date=0x7f0a0007;
-        public static final int ppostDate=0x7f0a000d;
-        public static final int pthumbnail=0x7f0a000b;
-        public static final int ptitle=0x7f0a000c;
+        public static final int ppostDate=0x7f0a000c;
+        public static final int pthumbnail=0x7f0a000a;
+        public static final int ptitle=0x7f0a000b;
+        public static final int realman_content=0x7f0a0011;
         public static final int title=0x7f0a0004;
         public static final int url=0x7f0a0009;
     }
@@ -91,10 +91,9 @@ public final class R {
         public static final int list_item_news=0x7f030006;
         public static final int list_item_politics=0x7f030007;
         public static final int list_item_rkp=0x7f030008;
-        public static final int politics_list_item=0x7f030009;
-        public static final int politics_single_list_item_view=0x7f03000a;
-        public static final int single_list_item_view_news=0x7f03000b;
-        public static final int single_list_item_view_realman=0x7f03000c;
+        public static final int single_list_item_view_news=0x7f030009;
+        public static final int single_list_item_view_politics=0x7f03000a;
+        public static final int single_list_item_view_realman=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f090000;

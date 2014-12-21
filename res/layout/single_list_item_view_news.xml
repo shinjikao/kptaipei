@@ -2,49 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+  >
 
-    <TextView
-        android:id="@+id/Single_Title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="title"
-        android:textColor="#000000"
-        android:textSize="22dip"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/Single_Item_Image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="Image"
-        
-     />
-
-    <ScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:scrollbars="none" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/Single_Content"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text=""
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="#7e7e7e"
-                android:textSize="16dip"
-                android:textStyle="normal" />
-        </LinearLayout>
-    </ScrollView>
+     <WebView
+        android:id="@+id/news_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       
+         />
 
 </LinearLayout>

@@ -55,7 +55,7 @@ public class CustomLstAdapter extends BaseAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 		if(convertView == null )
-			convertView = inflater.inflate(R.layout.politics_list_item ,null);
+			convertView = inflater.inflate(R.layout.list_item_politics ,null);
 		
 		if(imageLoader == null)
 			imageLoader = AppController.getInstance().getImageLoader();

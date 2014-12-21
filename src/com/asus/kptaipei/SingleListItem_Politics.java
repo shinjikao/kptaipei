@@ -23,13 +23,10 @@ import android.widget.TextView;
 
 public class SingleListItem_Politics extends Fragment {
 	private static String TAG = "KP";
-
-	private TextView tv_title;
-	private TextView tv_content;
-	private WebView myWebView;
 	private WebView myWebViewContent;
 
 	HashMap<String, String> _retVal;
+	String html="";
 
 	public SingleListItem_Politics(HashMap<String, String> retVal) {
 		_retVal = retVal;
@@ -48,48 +45,38 @@ public class SingleListItem_Politics extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.politics_single_list_item_view, container, false);
-		// TextView tv_content = (TextView)
-		// rootView.findViewById(R.id.Single_Content);
-		String html = _retVal.get("content").replace("src=\"//", "src=\"http://");
-
-		// Spanned sp = Html.fromHtml(_retVal.get("content"));
-
-		// tv_content.setText(sp);
-		// tv_content.setMovementMethod(new ScrollingMovementMethod());
-
+		View rootView = inflater.inflate(R.layout.single_list_item_view_politics, container, false);
+		
 		myWebViewContent = (WebView) rootView.findViewById(R.id.plolitics_content);
+		SettingWebView();
+		
 
+	
+		return rootView;
+
+	}
+	private void SettingWebView()
+	{
 		WebSettings ws = myWebViewContent.getSettings();
 		ws.getPluginState();
 		ws.setPluginState(PluginState.ON);
 		ws.setJavaScriptEnabled(true);
 		ws.setJavaScriptCanOpenWindowsAutomatically(true);
-
 		ws.setAllowFileAccess(true);
-		//ws.setAllowFileAccessFromFileURLs(true);
 		myWebViewContent.setInitialScale(getScale());
+		ws.setTextSize(WebSettings.TextSize.LARGER);
 		myWebViewContent.getSettings().setJavaScriptEnabled(true);
 		myWebViewContent.setEnabled(true);
-		html = html.trim().replace(html, " <body style='margin:0; padding: 0;'>" + html + "</body>");
-
-		Log.i(TAG, "html= " + html);
-		myWebViewContent.setWebChromeClient(new WebChromeClient() {});
+		html = _retVal.get("content").replace("src=\"//", "src=\"http://");
 		
+		html = html.trim().replace(html, " <body style='margin:0; padding: 0;'>" + html + "</body>");
+		myWebViewContent.setWebChromeClient(new WebChromeClient() {});
 		myWebViewContent.loadData(html, "text/html; charset=utf-8", "UTF-8");
-
-		// if(y_content.contains("<iframe" ) && y_content.contains("</iframe>")
-		// )
-		// {
-		// youtubeTag = "<html><body>" +
-		// y_content.substring(y_content.indexOf("<iframe"),
-		// y_content.indexOf("</iframe>") + 9)+ "</body></html>";
-		// s }
-
-		return rootView;
-
 	}
-
+	
+	
+	
+	
 	private int getScale() {
 		Display display = ((WindowManager) getActivity().getSystemService(
 				Context.WINDOW_SERVICE)).getDefaultDisplay();

@@ -1,4 +1,5 @@
-SmileBike
+KP-Taipei
 =========
 
-Tapei YouBikeApp
+<p>串接依據「野生柯P官網」的 API 資料，呈現競選臺北市長候選人柯文哲的政見資訊、
+新聞等相關資訊之APP<p>
